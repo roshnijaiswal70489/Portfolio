@@ -1,0 +1,143 @@
+/* ── Reading Progress Bar ── */
+.read-progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.read-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+    border-radius: 0 99px 99px 0;
+    box-shadow: 0 0 10px var(--accent-purple);
+    transition: width 0.1s linear;
+}
+
+/* ── Floating CTA Group ── */
+.floating-cta-wrap {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* Open to Work status pill */
+.floating-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px 5px 8px;
+    background: rgba(5, 5, 18, 0.92);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    border-radius: 99px;
+    backdrop-filter: blur(12px);
+    font-size: 11px;
+    font-weight: 600;
+    color: #34d399;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.floating-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 8px #34d399;
+    animation: flt-pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes flt-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+    }
+}
+
+/* Hire Me + Resume row */
+.floating-hire-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 22px;
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+    border: none;
+    border-radius: 99px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: var(--font-body);
+    cursor: pointer;
+    box-shadow: 0 6px 28px color-mix(in srgb, var(--accent-purple) 50%, transparent);
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+}
+
+.floating-hire-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 36px color-mix(in srgb, var(--accent-purple) 60%, transparent);
+}
+
+/* Resume icon button */
+.floating-resume-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    position: absolute;
+    bottom: 0;
+    right: calc(100% + 10px);
+}
+
+.floating-resume-btn:hover {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--accent-purple);
+    transform: scale(1.08);
+}
+
+/* Mobile: stack vertically, smaller */
+@media (max-width: 600px) {
+    .floating-cta-wrap {
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .floating-hire-btn {
+        padding: 11px 18px;
+        font-size: 13px;
+    }
+
+    .floating-resume-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .floating-status {
+        font-size: 10px;
+    }
+}

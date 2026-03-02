@@ -1,0 +1,458 @@
+.projects-section {
+    position: relative;
+}
+
+.project-filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.filter-btn {
+    padding: 8px 22px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    transition: var(--transition);
+    font-family: var(--font-body);
+}
+
+.filter-btn:hover {
+    border-color: var(--accent-purple);
+    color: var(--text-primary);
+}
+
+.filter-btn.active {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: var(--accent-purple);
+    color: var(--text-primary);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.project-card {
+    padding: 28px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    transform-style: preserve-3d;
+}
+
+.project-card-glow {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--proj-color) 20%, transparent) 0%, transparent 70%);
+    pointer-events: none;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.project-card:hover .project-card-glow {
+    opacity: 1;
+}
+
+.project-card:hover {
+    border-color: var(--proj-color) !important;
+}
+
+.project-card-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.project-type-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: color-mix(in srgb, var(--proj-color) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--proj-color) 35%, transparent);
+    color: var(--proj-color);
+}
+
+.project-featured-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: var(--accent-purple);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.project-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.project-card:hover .project-title {
+    color: var(--proj-color);
+}
+
+.project-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    overflow: hidden;
+}
+
+.project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.project-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+.project-links {
+    display: flex;
+    gap: 12px;
+}
+
+.project-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+    padding: 4px 0;
+}
+
+.project-link:hover {
+    color: var(--proj-color);
+}
+
+/* Case study hint */
+.case-study-hint {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--proj-color);
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project-card:hover .case-study-hint {
+    opacity: 1;
+}
+
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Case Study Modal */
+.case-study-modal {
+    background: var(--bg-card);
+    border: 1px solid var(--proj-color, var(--border));
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    max-width: 720px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 60px color-mix(in srgb, var(--proj-color) 20%, transparent);
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.modal-close {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 1;
+    margin-bottom: 12px;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* CS Header */
+.cs-header {
+    margin-bottom: 32px;
+}
+
+.cs-type-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--proj-color);
+    margin-bottom: 8px;
+}
+
+.cs-featured-badge {
+    display: inline-block;
+    margin-left: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 99px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    color: var(--accent-purple);
+}
+
+.cs-title {
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.cs-overview {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.cs-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* CS Body */
+.cs-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cs-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.cs-block {
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+}
+
+.cs-block-full {
+    grid-column: 1 / -1;
+}
+
+.cs-block-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--proj-color);
+    margin-bottom: 12px;
+}
+
+.cs-block-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+/* Approach list */
+.cs-approach-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cs-approach-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.cs-step-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--proj-color) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--proj-color) 40%, transparent);
+    color: var(--proj-color);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Challenges */
+.cs-challenges {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cs-challenge-item {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cs-challenge-problem {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.cs-challenge-icon {
+    color: #f59e0b;
+    flex-shrink: 0;
+    font-size: 13px;
+}
+
+.cs-challenge-arrow {
+    color: var(--proj-color);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.cs-challenge-solution {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.cs-check {
+    color: #34d399;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Impact */
+.cs-impact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cs-impact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.cs-impact-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--proj-color);
+    box-shadow: 0 0 8px var(--proj-color);
+    flex-shrink: 0;
+    margin-top: 5px;
+}
+
+/* CS Footer */
+.cs-footer {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .case-study-modal {
+        padding: 24px 18px;
+    }
+
+    .cs-two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .cs-challenge-item {
+        grid-template-columns: 1fr;
+    }
+
+    .cs-challenge-arrow {
+        display: none;
+    }
+}
